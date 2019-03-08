@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="MyCompanyInvoices">
+  <BOModel>
+    <Class Name="MyCompanyInvoices.Module.BusinessObjects.Client">
+      <AppearanceRules>
+        <AppearanceRule Id="ClientAPhone" TargetItems="PhoneNumber" Visibility="Hide" Criteria="[Type] = 'TypeA'" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+    <Class Name="MyCompanyInvoices.Module.BusinessObjects.Invoice">
+      <AppearanceRules>
+        <AppearanceRule Id="InvoiceStatus" TargetItems="*" BackColor="255, 192, 192" FontColor="Black" Enabled="False" Criteria="[Status] = ##Enum#MyCompanyInvoices.Module.BusinessObjects.Status,Completed#" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+  </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="Clients Managment">
+        <Items>
+          <Item Id="ClientA" Caption="Clients A List" ViewId="ClientsA" ToolTip="List of type A Clients" IsNewNode="True" />
+          <Item Id="ClientsB" ViewId="ClientsB" ToolTip="List of type B Clients" IsNewNode="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Options>
+    <LayoutManagerOptions RequiredFieldMark="*" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="18.2.4.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="18.2.4.0" IsNewNode="True" />
+  </SchemaModules>
+  <Validation>
+    <Rules>
+      <RuleRequiredField Id="ClientBCity" TargetType="MyCompanyInvoices.Module.BusinessObjects.Client" TargetPropertyName="UserAddress.City" TargetContextIDs="Save" TargetCriteria="[Type] = 'TypeB'" IsNewNode="True" />
+      <RuleRequiredField Id="ClientBPhone" TargetContextIDs="Save" TargetType="MyCompanyInvoices.Module.BusinessObjects.Client" TargetPropertyName="PhoneNumber" TargetCriteria="[Type] = 'TypeB'" CustomMessageTemplate="Phone Number cant be empty" IsNewNode="True" />
+      <RuleRequiredField Id="ClientBState" TargetType="MyCompanyInvoices.Module.BusinessObjects.Client" TargetPropertyName="UserAddress.StateProvince" TargetContextIDs="Save" TargetCriteria="[Type] = 'TypeB'" IsNewNode="True" />
+      <RuleRequiredField Id="ClientBStreet" TargetType="MyCompanyInvoices.Module.BusinessObjects.Client" TargetPropertyName="UserAddress.Street" TargetContextIDs="Save" TargetCriteria="[Type] = 'TypeB'" IsNewNode="True" />
+      <RuleRequiredField Id="ClientBZip" TargetType="MyCompanyInvoices.Module.BusinessObjects.Client" TargetPropertyName="UserAddress.ZipPostal" TargetContextIDs="Save" TargetCriteria="[Type] = 'TypeB'" IsNewNode="True" />
+    </Rules>
+  </Validation>
+  <Views>
+    <ListView Id="ClientsA" ClassName="MyCompanyInvoices.Module.BusinessObjects.Client" Caption="Clients A List" Criteria="[Type] = 'TypeA'" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Oid" PropertyName="Oid" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" Width="400" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="LastName" PropertyName="LastName" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Id" PropertyName="Id" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="PhoneNumber" PropertyName="PhoneNumber" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="UserAddress" PropertyName="UserAddress" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Type" PropertyName="Type" Width="70" Index="5" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="ClientsB" ClassName="MyCompanyInvoices.Module.BusinessObjects.Client" Caption="Clients B List" Criteria="[Type] = 'TypeB'" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Oid" PropertyName="Oid" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" Width="400" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="LastName" PropertyName="LastName" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Id" PropertyName="Id" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="PhoneNumber" PropertyName="PhoneNumber" Width="70" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="UserAddress" PropertyName="UserAddress" Width="70" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Type" PropertyName="Type" Width="70" Index="5" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Company_LookupListView" AllowNew="False" />
+    <ListView Id="CompanySeller_LookupListView" AllowNew="False" />
+    <DetailView Id="Invoice_DetailView">
+      <Items>
+        <PropertyEditor Id="Seller" ImmediatePostData="True" DataSourceCriteria="" DataSourceProperty="" />
+        <PropertyEditor Id="Subsidiary" DataSourceProperty="" />
+      </Items>
+    </DetailView>
+    <ListView Id="Invoice_Products_ListView" Criteria="" />
+    <ListView Id="Product_ListView" Criteria="" />
+    <ListView Id="Subsidiary_LookupListView" AllowNew="False" />
+  </Views>
+</Application>

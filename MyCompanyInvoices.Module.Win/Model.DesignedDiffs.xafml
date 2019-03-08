@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="18.2.4.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="18.2.4.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="18.2.4.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="Invoice_ListView">
+      <Filters>
+        <Filter Id="@4722e79d-77b6-4aef-803e-c8a3eefb893e" Criteria="[Seller.Subsidiary.Oid] = [Subsidiary.Oid]" IsNewNode="True" />
+      </Filters>
+    </ListView>
+  </Views>
+</Application>
